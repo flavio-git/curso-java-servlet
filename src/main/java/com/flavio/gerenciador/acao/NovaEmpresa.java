@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/nova-empresa")
-public class NovaEmpresa {
+public class NovaEmpresa implements Acao {
     
     public String executaAcao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         

@@ -1,14 +1,10 @@
 package com.flavio.gerenciador.servlet;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
-import com.flavio.gerenciador.acao.EditaEmpresa;
-import com.flavio.gerenciador.acao.EmpresasCadastradas;
-import com.flavio.gerenciador.acao.FormNovaEmpresa;
+import com.flavio.gerenciador.acao.Acao;
 import com.flavio.gerenciador.acao.Index;
-import com.flavio.gerenciador.acao.ModificaEmpresa;
-import com.flavio.gerenciador.acao.NovaEmpresa;
-import com.flavio.gerenciador.acao.RemoveEmpresa;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -27,56 +23,34 @@ public class Controller extends HttpServlet {
 		System.out.println("\nchamando Controller");
 	    
 	    String paramAcao = request.getParameter("acao");
-	    
-	    System.out.println(paramAcao);
-	    
-	    String caminhoJsp = null;
-	    
+	    	    
+	    String nomeDaClasse = "com.flavio.gerenciador.acao." + paramAcao;
+	    System.out.println(nomeDaClasse);
+	    		    
+	    String caminhoJsp;
+		
 	    if(paramAcao == null) {
-            
+          
 	        Index index = new Index();
 	  	        
 	        caminhoJsp = index.executaAcao(request, response); 
-                   
-        } else if(paramAcao.equals("EmpresasCadastradas")) {
+                 
+	    } else {
 	        
-	        EmpresasCadastradas ec = new EmpresasCadastradas();
-	       	        
-	        caminhoJsp = ec.executaAcao(request, response);
-	        
-	    } else if(paramAcao.equals("NovaEmpresa")) {
-            
-            NovaEmpresa ne = new NovaEmpresa();
-            
-            caminhoJsp = ne.executaAcao(request, response);
-            
-        } else if(paramAcao.equals("EditaEmpresa")) {
-	        
-	        EditaEmpresa ee = new EditaEmpresa();
-	        
-	        caminhoJsp = ee.executaAcao(request, response);
-	        
-	    } else if(paramAcao.equals("ModificaEmpresa")) {
-	        
-	        ModificaEmpresa me = new ModificaEmpresa();
-	        
-	        caminhoJsp = me.executaAcao(request, response);
-	        
-	    } else if(paramAcao.equals("RemoveEmpresa")) {
-	    	
-	    	RemoveEmpresa re = new RemoveEmpresa();
-	    	
-	    	caminhoJsp = re.executaAcao(request, response);
-	    	
-	    } else if(paramAcao.equals("FormNovaEmpresa")) {
-	    	
-	    	FormNovaEmpresa fne = new FormNovaEmpresa();
-	    	
-	    	caminhoJsp = fne.executaAcao(request, response);
+	    	try {
+				Class classe = Class.forName(nomeDaClasse); // carrega a classe com o nome
+				Object obj = classe.getDeclaredConstructor().newInstance(null);
+				Acao acao = (Acao) obj;
+				caminhoJsp = acao.executaAcao(request, response);
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | NoSuchMethodException | SecurityException | ServletException
+					| IOException e) {
+				throw new ServletException(e);
+			}
 	    	
 	    }
 	    
-	    
+	 	    
 	    String[] tipoEEndereco = caminhoJsp.split(":");
 	    
 	    if(tipoEEndereco[0].equals("forward")) {

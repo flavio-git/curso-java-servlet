@@ -7,7 +7,7 @@ import com.flavio.gerenciador.model.Banco;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class RemoveEmpresa {
+public class RemoveEmpresa implements Acao {
 
 	public String executaAcao(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		

@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/empresas-cadastradas")
-public class EmpresasCadastradas {
+public class EmpresasCadastradas implements Acao {
     
     public String executaAcao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         

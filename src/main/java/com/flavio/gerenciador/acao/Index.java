@@ -6,7 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class Index {
+public class Index implements Acao {
     
     public String executaAcao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
