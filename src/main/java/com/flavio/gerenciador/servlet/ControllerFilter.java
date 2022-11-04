@@ -4,26 +4,32 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import com.flavio.gerenciador.acao.Acao;
-import com.flavio.gerenciador.acao.Index;
+import com.flavio.gerenciador.acao.LoginForm;
 
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/entrada")
-public class Controller extends HttpServlet {
+
+public class ControllerFilter extends HttpFilter implements Filter {
+
 	private static final long serialVersionUID = 1L;
 
-	
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		System.out.println("\nchamando Controller");
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
+		
+		System.out.println("\nchamando ControllerFilter");
+		
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
+		HttpServletResponse response = (HttpServletResponse) servletResponse;
+		
+		String paramAcao = request.getParameter("acao");
 	    
-	    String paramAcao = request.getParameter("acao");
-	    	    
 	    String nomeDaClasse = "com.flavio.gerenciador.acao." + paramAcao;
 	    System.out.println(nomeDaClasse);
 	    		    
@@ -31,17 +37,15 @@ public class Controller extends HttpServlet {
 		
 	    if(paramAcao == null) {
           
-	        Index index = new Index();
-	  	        
-	        caminhoJsp = index.executaAcao(request, response); 
-                 
+	    	LoginForm lf = new LoginForm();
+	    	caminhoJsp = lf.run(request, response);
+	    	
 	    } else {
 	        
 	    	try {
-				Class classe = Class.forName(nomeDaClasse); // carrega a classe com o nome
-				Object obj = classe.getDeclaredConstructor().newInstance(null);
-				Acao acao = (Acao) obj;
-				caminhoJsp = acao.executaAcao(request, response);
+				Class<?> classe = Class.forName(nomeDaClasse); // carrega a classe com o nome 
+				Acao acao = (Acao) classe.getDeclaredConstructor().newInstance(null);
+				caminhoJsp = acao.run(request, response);
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | NoSuchMethodException | SecurityException | ServletException
 					| IOException e) {
@@ -50,7 +54,6 @@ public class Controller extends HttpServlet {
 	    	
 	    }
 	    
-	 	    
 	    String[] tipoEEndereco = caminhoJsp.split(":");
 	    
 	    if(tipoEEndereco[0].equals("forward")) {

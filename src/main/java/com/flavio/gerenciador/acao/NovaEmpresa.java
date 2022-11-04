@@ -9,14 +9,12 @@ import com.flavio.gerenciador.model.Banco;
 import com.flavio.gerenciador.model.Empresa;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/nova-empresa")
 public class NovaEmpresa implements Acao {
     
-    public String executaAcao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         System.out.println("\nchamando NovaEmpresa");
         
@@ -42,9 +40,9 @@ public class NovaEmpresa implements Acao {
         empresa.setDataAbertura(dataAbertura);
         
         // adicionando a empresa na lista de empresas do objeto Banco
-        Banco.adiciona(empresa);
+        Banco.adicionaEmpresa(empresa);
                    
-        return "redirect:entrada";
+        return "forward:index.jsp";
         
     }
     

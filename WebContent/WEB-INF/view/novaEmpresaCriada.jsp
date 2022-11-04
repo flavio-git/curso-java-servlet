@@ -13,7 +13,7 @@
 	<p>Nome: ${nomeEmpresa} </p>
 	<p>Data de abertura: ${dataAbertura} </p>
 	
-	<a href="index.html">voltar</a>
+	<a href="entrada?acao=Index">voltar</a>
 	
 </body>
 </html>

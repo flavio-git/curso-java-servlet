@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="5.0">
+  <filter>
+    <filter-name>AutenticacaoFilter</filter-name>
+    <filter-class>com.flavio.gerenciador.servlet.AutenticacaoFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AutenticacaoFilter</filter-name>
+    <url-pattern>/entrada</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>ControllerFilter</display-name>
+    <filter-name>ControllerFilter</filter-name>
+    <filter-class>com.flavio.gerenciador.servlet.ControllerFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ControllerFilter</filter-name>
+    <url-pattern>/entrada</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpresasCadastradasService</display-name>
+    <servlet-name>EmpresasCadastradasService</servlet-name>
+    <servlet-class>com.flavio.gerenciador.servlet.EmpresasCadastradasService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpresasCadastradasService</servlet-name>
+    <url-pattern>/empresas-cadastradas</url-pattern>
+  </servlet-mapping>
+</web-app>

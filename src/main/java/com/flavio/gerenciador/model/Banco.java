@@ -8,18 +8,28 @@ import java.util.List;
 public class Banco {
 
 	private static List<Empresa> empresasList = new ArrayList<>();
+	private static List<Usuario> usuariosList = new ArrayList<>();
 
 	static {
 		Empresa empresa1 = new Empresa();
 		Empresa empresa2 = new Empresa();
 		empresa1.setNome("Facebook");
 		empresa2.setNome("Google");
-		adiciona(empresa1);
-		adiciona(empresa2);
+		adicionaEmpresa(empresa1);
+		adicionaEmpresa(empresa2);
+		
+		Usuario usuario1 = new Usuario();
+		Usuario usuario2 = new Usuario();
+		usuario1.setLogin("Fabian");
+		usuario1.setSenha("1234");
+		usuario2.setLogin("Ricardo");
+		usuario2.setSenha("4321");
+		adicionaUsuario(usuario1);
+		adicionaUsuario(usuario2);
 	}
 	
 	// adiciona uma empresa na lista
-	public static void adiciona(Empresa empresa) {
+	public static void adicionaEmpresa(Empresa empresa) {
 		Banco.empresasList.add(empresa);
 	}
 	
@@ -73,6 +83,26 @@ public class Banco {
         return false;
     }
 	
-		
+    
+    // adiciona um usuario do sistema na lista de usuarios
+    public static void adicionaUsuario(Usuario usuario) {
+    	Banco.usuariosList.add(usuario);
+    }
+	
+    
+    // checa o login e a senha de usuario no banco
+    public static Usuario checkLoginUsuario(String login, String senha) {
+    	//boolean check = false;
+    	for (Usuario usuario : usuariosList) {
+    		if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)) {
+    			return usuario;
+    		} 
+		}
+    	return null;
+    }
+    
+    
+    
+    
 }
 

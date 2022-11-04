@@ -25,7 +25,7 @@
 			</li>
 		</c:forEach>
 	</ul>
-	<a href="entrada">voltar</a>
+	<a href="entrada?acao=Index">voltar</a>
 </body>
 </html>
 

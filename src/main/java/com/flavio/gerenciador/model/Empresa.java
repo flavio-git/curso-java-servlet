@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Empresa {
 
-	private static Integer controleID = 1;
+	private static Integer CONTROLE_ID = 1;
 	private Integer id;
 	private String nome;
 	private Date dataAbertura = new Date();
 	
 	public Empresa() {
-		this.id = Empresa.controleID;
-		Empresa.controleID++;
+		this.id = Empresa.CONTROLE_ID;
+		Empresa.CONTROLE_ID++;
 	}
 	
 	public Integer getId() {

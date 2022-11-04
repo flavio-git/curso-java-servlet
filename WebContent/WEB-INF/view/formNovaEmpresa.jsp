@@ -19,6 +19,6 @@
 		<input id="data-abertura" name="abertura" type="date" required="required">
 		<input type="submit">
 	</form>
-	<a href="entrada">voltar</a>
+	<a href="entrada?acao=Index">voltar</a>
 </body>
 </html>

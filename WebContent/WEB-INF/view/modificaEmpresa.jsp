@@ -15,7 +15,7 @@
 	<strong> nome: </strong> ${nome} | 
 	<strong> abertura: </strong> ${data}
 	
-	<a href="entrada">voltar</a>
+	<a href="entrada?acao=Index">voltar</a>
 	
 </body>
 </html>

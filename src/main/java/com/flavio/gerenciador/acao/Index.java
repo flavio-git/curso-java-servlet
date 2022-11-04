@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class Index implements Acao {
     
-    public String executaAcao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         System.out.println("chamando Index");
         

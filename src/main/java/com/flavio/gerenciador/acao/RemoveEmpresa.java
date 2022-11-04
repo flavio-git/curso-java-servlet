@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class RemoveEmpresa implements Acao {
 
-	public String executaAcao(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String run(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		System.out.println("\nchamando RemoveEmpresa");
 		
@@ -21,7 +21,7 @@ public class RemoveEmpresa implements Acao {
 		
 		Banco.removeEmpresa(idEmpresa);
 		
-		return "redirect:entrada";
+		return "forward:index.jsp";
 		
 	}
 	

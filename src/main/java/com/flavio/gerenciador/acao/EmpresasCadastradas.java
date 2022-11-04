@@ -7,14 +7,12 @@ import com.flavio.gerenciador.model.Banco;
 import com.flavio.gerenciador.model.Empresa;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/empresas-cadastradas")
 public class EmpresasCadastradas implements Acao {
     
-    public String executaAcao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         System.out.println("\nchamando EmpresasCadastradas");
         
